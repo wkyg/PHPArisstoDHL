@@ -96,17 +96,39 @@
                                 </tr><?php
                                 for($i=0; $i<sizeof($result->trackItemResponse->bd->shipmentItems[0]->events); $i++){?>
                                     <tr>
-                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description."<br>";  ?></td>
-                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime."<br><br>"; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
+                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
                                     </tr><?php                                                   
                                 }?>                                
                             </tbody>                      
                         </table>
                     </div> 
                 <?php
-            }else if($role == "cust"){                
-                echo "Status: ".$result->trackItemResponse->bd->shipmentItems[0]->events[0]->description."<br>";
-                echo "Time: ".$result->trackItemResponse->bd->shipmentItems[0]->events[0]->dateTime."<br><br>";                                
+            }else if($role == "cust"){?>
+                <div class="col col-lg-12">
+                    <table class="table table-danger table-hover">
+                        <thead class="texdt-center">
+                            <tr>
+                                <th scope="col" colspan="3">Shipment Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="text-center" scope="row" colspan="2">Tracking ID</th>
+                                <td scope="row"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->trackingID; ?></td>
+                            </tr>
+                            <tr class="text-center">
+                                <th scope="row" colspan="2">Activity</th>
+                                <th scope="row" colspan="2">Time</th>
+                            </tr>
+                            <tr>
+                                <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[0]->description; ?></td>
+                                <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[0]->dateTime; ?></td>                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            <?php
             }
 	    }
     }
