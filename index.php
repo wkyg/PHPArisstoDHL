@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="row justify-content-md-center">
                     <div class="col col-lg-5">     
-                        <img src="logo-52.png" class="img-fluid" height="200" width="200" alt="arissto">                    
+                        <a href="index.php"><img src="logo-52.png" class="img-fluid" height="200" width="200" alt="arissto"></a>                                            
                     </div>                    
                 </div>
                 <div class="row justify-content-md-center mt-5">
