@@ -107,7 +107,7 @@
             }else if($role == "cust"){?>
                 <div class="col col-lg-12">
                     <table class="table table-danger table-hover">
-                        <thead class="texdt-center">
+                        <thead class="text-center">
                             <tr>
                                 <th scope="col" colspan="3">Shipment Status</th>
                             </tr>
@@ -127,8 +127,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-            <?php
+                </div><?php
             }
 	    }
     }
