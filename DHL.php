@@ -85,19 +85,19 @@
                                     <th scope="col" colspan="3">Shipment Status</th>                                    
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-center">
                                 <tr>
                                     <th class="text-center" scope="row" colspan="2">Tracking ID</th>
                                     <td scope="row"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->trackingID; ?></td>
                                 </tr>
                                 <tr class="text-center">
-                                    <th scope="row" colspan="2">Activity</th>
                                     <th scope="row" colspan="2">Time</th>
+                                    <th scope="row" colspan="2">Activity</th>
                                 </tr><?php
                                 for($i=0; $i<sizeof($result->trackItemResponse->bd->shipmentItems[0]->events); $i++){?>
                                     <tr>
-                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
                                         <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
                                     </tr><?php                                                   
                                 }?>                                
                             </tbody>                      
@@ -112,18 +112,18 @@
                                 <th scope="col" colspan="3">Shipment Status</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             <tr>
                                 <th class="text-center" scope="row" colspan="2">Tracking ID</th>
                                 <td scope="row"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->trackingID; ?></td>
                             </tr>
                             <tr class="text-center">
-                                <th scope="row" colspan="2">Activity</th>
                                 <th scope="row" colspan="2">Time</th>
+                                <th scope="row" colspan="2">Activity</th>
                             </tr>
                             <tr>
-                                <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[0]->description; ?></td>
                                 <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[0]->dateTime; ?></td>                                
+                                <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[0]->description; ?></td>
                             </tr>
                         </tbody>
                     </table>
