@@ -44,6 +44,8 @@
 
         //echo $sin;
 
+        //$i = 0;
+
         $url = "https://api.dhlecommerce.dhl.com/rest/v3/Tracking";
 	    $method = "POST";
 	    $headers = array(
@@ -120,11 +122,81 @@
                             <tr class="text-center">
                                 <th scope="row" colspan="2">Time</th>
                                 <th scope="row" colspan="2">Activity</th>
-                            </tr>
-                            <tr>
-                                <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[0]->dateTime; ?></td>                                
-                                <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[0]->description; ?></td>
-                            </tr>
+                            </tr><?php                           
+                            for($i=0; $i<sizeof($result->trackItemResponse->bd->shipmentItems[0]->events); $i++){
+                                if($result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description == "Arrived at facility"){?>
+                                    <tr>
+                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
+                                    </tr><?php                              
+                                }                                
+                                if($result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description == "Delivery Rescheduled [THE CUSTOMER HAS RESCHEDULED DUE TO NOT AT HOME]"){?>
+                                    <tr>
+                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
+                                    </tr><?php                              
+                                }
+                                if($result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description == "Delivery was attempted: closed premises [THE BUSINESS ADDRESS IS CLOSED]"){?>
+                                    <tr>
+                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
+                                    </tr><?php                              
+                                }
+                                if($result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description == "Delivery was refused"){?>
+                                    <tr>
+                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
+                                    </tr><?php                              
+                                }
+                                if($result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description == "Departed from facility"){?>
+                                    <tr>
+                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
+                                    </tr><?php                              
+                                }
+                                if($result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description == "Out for delivery"){?>
+                                    <tr>
+                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
+                                    </tr><?php                              
+                                }
+                                if($result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description == "Processed at delivery facility"){?>
+                                    <tr>
+                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
+                                    </tr><?php                              
+                                }
+                                if($result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description == "Return shipment being processed"){?>
+                                    <tr>
+                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
+                                    </tr><?php                              
+                                }
+                                if($result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description == "Return shipment was successfully delivered"){?>
+                                    <tr>
+                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
+                                    </tr><?php                              
+                                }
+                                if($result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description == "Shipment data received"){?>
+                                    <tr>
+                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
+                                    </tr><?php                              
+                                }
+                                if($result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description == "Sorted to delivery facility"){?>
+                                    <tr>
+                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
+                                    </tr><?php                              
+                                }
+                                if($result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description == "Successfully delivered"){?>
+                                    <tr>
+                                        <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->dateTime; ?></td>
+                                        <td scope="row" colspan="2"><?php  echo $result->trackItemResponse->bd->shipmentItems[0]->events[$i]->description;  ?></td>
+                                    </tr><?php                              
+                                }                                
+                            }?> 
                         </tbody>
                     </table>
                 </div><?php

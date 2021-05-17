@@ -17,8 +17,19 @@
                     </div>                    
                 </div>
                 <div class="row justify-content-md-center mt-3">
+                    <?php
+                        if($role == "cust"){?>
+                            <p class="fs-4">Customer</p><?php
+                        }else if($role == "stf"){?>
+                            <p class="fs-4">Staff</p><?php
+                        }else{?>
+                            <p class="fs-4">E R R O R</p><?php
+                        }
+                    ?>                    
+                </div>
+                <div class="row justify-content-md-center mt-3">
                     <div class="col col-lg-5">
-                        <?php                                               
+                        <?php                                             
                             getToken();                           
                             getTracking($sinNo, $role);
                         ?>                                                
