@@ -29,7 +29,25 @@
                             </div>
                         </form>
                     </div>                                       
-                </div>                
+                </div> 
+                <div class="row justify-content-md-center mt-3">
+                    <p class="fs-4">Upload</p>
+                </div>  
+                <div class="row justify-content-md-center mt-3">                    
+                    <div class="col col-lg-7">
+                        <form name="upload" action="upload.php" method="POST" enctype="multipart/form-data">
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control" name="file" id="toMySQL" accept=".csv">
+                                <span class="input-group-text" id="basic-addon1">Type</span>
+                                <select class="form-select" id="type" name="type">
+                                    <option value="AdHoc">AdHoc</option>
+                                    <option value="Batch">Batch</option>
+                                </select>
+                                <button type="submit" class="btn btn-danger">Upload</button>                            
+                            </div>
+                        </form>
+                    </div>
+                </div>             
             </div>
         </main> 
         <?php
