@@ -39,7 +39,7 @@
         return $token;
     }  
 
-    function getTracking($sin, $role){
+    function getTracking($trackingNo, $role){
         //echo $passTok;
 
         //echo $sin;
@@ -52,7 +52,7 @@
 	        "content-type: application/json"	        
 	    );        
 	    $body = '{"trackItemRequest": {"hdr": {"messageType": "TRACKITEM","accessToken": "';
-        $body_2 = '","messageDateTime": "2021-04-14T14:32:14+08:00","messageVersion": "1.0","messageLanguage": "en"},"bd": {       "customerAccountId": null,     "soldToAccountId": null,"pickupAccountId": null,"ePODRequired": "N","trackingReferenceNumber": ["MYCGU';
+        $body_2 = '","messageDateTime": "2021-04-14T14:32:14+08:00","messageVersion": "1.0","messageLanguage": "en"},"bd": {       "customerAccountId": null,     "soldToAccountId": null,"pickupAccountId": null,"ePODRequired": "N","trackingReferenceNumber": ["';
         $body_3 = '"]}}}';
         
         //echo $body.getToken().$body_2.$sin.$body_3."<br><br>";     //test json string
@@ -64,7 +64,7 @@
 	        CURLOPT_URL => $url,
 	        CURLOPT_CUSTOMREQUEST => $method,
 	        CURLOPT_HTTPHEADER => $headers,
-			CURLOPT_POSTFIELDS => $body.getToken().$body_2.$sin.$body_3
+			CURLOPT_POSTFIELDS => $body.getToken().$body_2.$trackingNo.$body_3
 	    ));
 	
 	    $response = curl_exec($curl);
@@ -103,17 +103,17 @@
                     <table class="table table-danger table-hover">
                         <tbody class="text-center">
                             <tr>
-                                <th class="text-center" scope="row" colspan="1">SIN NO</th>
-                                <td scope="row" colspan="2"><?php echo $sin ?></td>
-                            </tr>
-                            <tr>
-                                <th class="text-center" scope="row" colspan="1">Shipping Address</th>
-                                <td scope="row" colspan="2"><?php echo "//Shipping address here haha//"; ?></td>
+                                <th class="text-center" scope="row" colspan="1">Reference No.</th>
+                                <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->shipmentID ?></td>
                             </tr>
                             <tr>
                                 <th class="text-center" scope="row" colspan="1">Tracking ID</th>
                                 <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->trackingID; ?></td>
                             </tr>                            
+                            <tr>
+                                <th class="text-center" scope="row" colspan="1">Shipping Address</th>
+                                <td scope="row" colspan="2"><?php echo "//Shipping address here haha//"; ?></td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-danger table-hover">

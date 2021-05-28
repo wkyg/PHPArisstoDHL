@@ -18,8 +18,8 @@
                     <div class="col col-lg-7">
                         <form name="SinEnter" action="track.php" method="POST">                           
                             <div class="input-group mb-3">                                
-                                <span class="input-group-text" id="basic-addon1">SIN</span>
-                                <input type="text" class="form-control" id="sinNo" name="sinNo" placeholder="Please enter your SIN" required>
+                                <span class="input-group-text" id="basic-addon1">Tracking No.</span>
+                                <input type="text" class="form-control" id="trackingNo" name="trackingNo" placeholder="eg. 5012359761254711" required>
                                 <span class="input-group-text" id="basic-addon1">Role</span>
                                 <select class="form-select" id="roleSelect" name="role">                                    
                                     <option value="cust">Cutomer</option>

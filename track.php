@@ -3,7 +3,7 @@
     include "DHL.php";
     include_once "header.php";
 
-    $sinNo = $_POST["sinNo"];
+    $trackingNo = $_POST["trackingNo"];
     $role = $_POST["role"];
 ?>
 <!doctype html>
@@ -31,7 +31,7 @@
                     <div class="col col-lg-6">
                         <?php                                             
                             getToken();                           
-                            getTracking($sinNo, $role);
+                            getTracking($trackingNo, $role);
                         ?>                                                
                     </div>                    
                 </div>                
