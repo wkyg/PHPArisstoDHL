@@ -113,17 +113,7 @@
                             <tr>
                                 <th class="text-center" scope="row" colspan="1">Tracking ID</th>
                                 <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->trackingID; ?></td>
-                            </tr>
-                            <tr class="text-center">
-                                <th scope="row" colspan="1">Current Location</th>
-                                <td scope="row" colspan="1">
-                                    <?php 
-                                        echo $result->trackItemResponse->bd->shipmentItems[0]->events[0]->address->city; 
-                                        echo ", ";
-                                        echo $result->trackItemResponse->bd->shipmentItems[0]->events[0]->address->state;                                            
-                                    ?>                                
-                                </td>
-                            </tr>
+                            </tr>                            
                         </tbody>
                     </table>
                     <table class="table table-danger table-hover">
@@ -188,17 +178,7 @@
                             <tr>
                                 <th class="text-center" scope="row" colspan="1">Tracking ID</th>
                                 <td scope="row"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->trackingID; ?></td>
-                            </tr>
-                            <tr class="text-center">
-                                <th scope="row" colspan="1">Latest Location</th>
-                                <td scope="row" colspan="1">
-                                    <?php 
-                                        echo $result->trackItemResponse->bd->shipmentItems[0]->events[0]->address->city; 
-                                        echo ", ";
-                                        echo $result->trackItemResponse->bd->shipmentItems[0]->events[0]->address->state;                                            
-                                    ?>                                
-                                </td>
-                            </tr>
+                            </tr>                            
                         </tbody>
                     </table>
                     <table class="table table-danger table-hover">
