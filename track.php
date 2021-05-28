@@ -28,7 +28,7 @@
                     ?>                    
                 </div>
                 <div class="row justify-content-md-center mt-3">
-                    <div class="col col-lg-5">
+                    <div class="col col-lg-6">
                         <?php                                             
                             getToken();                           
                             getTracking($sinNo, $role);
