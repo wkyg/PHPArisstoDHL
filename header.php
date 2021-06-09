@@ -1,3 +1,6 @@
+<?php
+    //error_reporting(0);
+?>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">

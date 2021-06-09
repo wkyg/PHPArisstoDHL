@@ -1,7 +1,6 @@
 <?php
     include "dbconn.php";
-    include "DHL.php";
-    include "test.php";
+    include "DHL.php";    
     include_once "header.php";
 
     $trackingNo = $_POST["trackingNo"];
@@ -30,10 +29,9 @@
                 </div>
                 <div class="row justify-content-md-center mt-3">
                     <div class="col col-lg-6">
-                        <?php 
-                            TestgetToken();                                            
-                            //getToken();                           
-                            //getTracking($trackingNo, $role);
+                        <?php                                                           
+                            getToken();                           
+                            getTracking($trackingNo, $role);
                         ?>                                                
                     </div>                    
                 </div>  

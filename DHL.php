@@ -1,4 +1,4 @@
-<?php
+<?php    
     function getToken(){   
         $user = "MTYzNzcxMzQzOQ==";
         $password = "MTQ4MDg3O2304211619163487";
@@ -23,8 +23,9 @@
         $response = curl_exec($curl);
         $err = curl_error($curl);   
     
-        $result = json_decode($response);
+        $result = json_decode($response);        
 
+        $status = $result->accessTokenResponse->responseStatus->code;
         $token = $result->accessTokenResponse->token;
     
         curl_close($curl);   
@@ -33,26 +34,44 @@
             echo "cURL Error #:" . $err;
         } else {
             //var_dump($result);
-            //echo $token;      
-        }        
-
-        return $token;
+            if($status == "100000"){
+                return $token;
+            }else if ($status == "100099"){
+                echo "Make sure valid scope and clientId are provided.";
+            }       
+        }       
     }  
 
     function getTracking($trackingNo, $role){
-        //echo $passTok;
+        include "dbconn.php";
 
-        //echo $sin;
+        if($conn){
+            $sql = "SELECT * FROM deliverymapping WHERE TrackingNo = '$trackingNo'";
+            $result = $conn->query($sql);
 
-        //$i = 0;
+            if(mysqli_query($conn, $sql)){
+                while($row = $result->fetch_assoc()){
+                    $invoiceNo = $row["InvoiceNo"];
+                    $ShipmentAddress = $row["ShipmentAddress"];
 
+                    echo $invoiceNo.$ShipmentAddress;
+                }
+            }
+        }
+        
         $url = "https://api.dhlecommerce.dhl.com/rest/v3/Tracking";
 	    $method = "POST";
 	    $headers = array(
 	        "content-type: application/json"	        
-	    );        
+	    );    
+        
+        $soldto = "5263731804";
+        $pickup = "5362939";
+        
 	    $body = '{"trackItemRequest": {"hdr": {"messageType": "TRACKITEM","accessToken": "';
-        $body_2 = '","messageDateTime": "2021-04-14T14:32:14+08:00","messageVersion": "1.0","messageLanguage": "en"},"bd": {       "customerAccountId": null,     "soldToAccountId": null,"pickupAccountId": null,"ePODRequired": "N","trackingReferenceNumber": ["';
+        $body_2 = '","messageDateTime": "2021-04-14T14:32:14+08:00","messageVersion": "1.0","messageLanguage": "en"},"bd": {       "customerAccountId": null,     "soldToAccountId":"';
+        $body_2_1 = '","pickupAccountId":"';
+        $body_2_2 = '","ePODRequired": "N","trackingReferenceNumber": ["';
         $body_3 = '"]}}}';
         
         //echo $body.getToken().$body_2.$sin.$body_3."<br><br>";     //test json string
@@ -64,7 +83,7 @@
 	        CURLOPT_URL => $url,
 	        CURLOPT_CUSTOMREQUEST => $method,
 	        CURLOPT_HTTPHEADER => $headers,
-			CURLOPT_POSTFIELDS => $body.getToken().$body_2.$trackingNo.$body_3
+			CURLOPT_POSTFIELDS => $body.getToken().$body_2.$soldto.$body_2_1.$pickup.$body_2_2.$trackingNo.$body_3
 	    ));
 	
 	    $response = curl_exec($curl);
@@ -103,8 +122,8 @@
                     <table class="table table-danger table-hover">
                         <tbody class="text-center">
                             <tr>
-                                <th class="text-center" scope="row" colspan="1">Reference No.</th>
-                                <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->shipmentID ?></td>
+                                <th class="text-center" scope="row" colspan="1">Invoice No.</th>
+                                <td scope="row" colspan="2"><?php echo $invoiceNo; ?></td>
                             </tr>
                             <tr>
                                 <th class="text-center" scope="row" colspan="1">Tracking ID</th>
@@ -112,7 +131,7 @@
                             </tr>                            
                             <tr>
                                 <th class="text-center" scope="row" colspan="1">Shipping Address</th>
-                                <td scope="row" colspan="2"><?php echo "//Shipping address here//"; ?></td>
+                                <td scope="row" colspan="2"><?php echo $ShipmentAddress; ?></td>
                             </tr>
                         </tbody>
                     </table>
