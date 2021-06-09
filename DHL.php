@@ -1,7 +1,25 @@
 <?php    
     function getToken(){   
-        $user = "MTYzNzcxMzQzOQ==";
-        $password = "MTQ4MDg3O2304211619163487";
+        include "dbconn.php"; 
+
+        if($conn){
+            $sqlAPI = "SELECT USERNAME, PASSWORD FROM api_user WHERE ID = '1' AND API_Provider = 'DHL eCommerce'";
+            $DBresultAPI = $conn->query($sqlAPI);
+
+            if(mysqli_query($conn, $sqlAPI)){
+                while($rowAPI = $DBresultAPI->fetch_assoc()){                                                    
+                    $user = $rowAPI["USERNAME"];
+                    $password = $rowAPI["PASSWORD"];
+                }
+            }else{
+                echo "Error when fetching data from database";
+            }
+        }else{
+            die("Fail to connect to database");
+        }  
+        
+        $conn->close();
+
         $returnFormat = "json";
          
         $url = "https://api.dhlecommerce.dhl.com/rest/v1/OAuth/AccessToken?clientId=".$user.
@@ -43,21 +61,7 @@
     }  
 
     function getTracking($trackingNo, $role){
-        include "dbconn.php";
-
-        if($conn){
-            $sql = "SELECT * FROM deliverymapping WHERE TrackingNo = '$trackingNo'";
-            $result = $conn->query($sql);
-
-            if(mysqli_query($conn, $sql)){
-                while($row = $result->fetch_assoc()){
-                    $invoiceNo = $row["InvoiceNo"];
-                    $ShipmentAddress = $row["ShipmentAddress"];
-
-                    echo $invoiceNo.$ShipmentAddress;
-                }
-            }
-        }
+        include "dbconn.php";        
         
         $url = "https://api.dhlecommerce.dhl.com/rest/v3/Tracking";
 	    $method = "POST";
@@ -123,7 +127,26 @@
                         <tbody class="text-center">
                             <tr>
                                 <th class="text-center" scope="row" colspan="1">Invoice No.</th>
-                                <td scope="row" colspan="2"><?php echo $invoiceNo; ?></td>
+                                <td scope="row" colspan="2">
+                                    <?php                                         
+                                        if($conn){
+                                            $sqlInvoice = "SELECT InvoiceNo FROM deliverymapping WHERE TrackingNo = '$trackingNo'";
+                                            $DBresultInvoice = $conn->query($sqlInvoice);
+
+                                            if(mysqli_query($conn, $sqlInvoice)){
+                                                while($rowInvoice = $DBresultInvoice->fetch_assoc()){                                                    
+                                                    $invoiceNo = $rowInvoice["InvoiceNo"];
+
+                                                    echo "[".$invoiceNo."] ";
+                                                }
+                                            }else{
+                                                echo "Error when fetching data from database";
+                                            }
+                                        }else{
+                                            die("Fail to connect to database");
+                                        }                                        
+                                    ?>
+                                </td>
                             </tr>
                             <tr>
                                 <th class="text-center" scope="row" colspan="1">Tracking ID</th>
@@ -131,7 +154,26 @@
                             </tr>                            
                             <tr>
                                 <th class="text-center" scope="row" colspan="1">Shipping Address</th>
-                                <td scope="row" colspan="2"><?php echo $ShipmentAddress; ?></td>
+                                <td scope="row" colspan="2">
+                                    <?php 
+                                        if($conn){
+                                            $sqlAddr = "SELECT ShipmentAddress FROM deliverymapping WHERE TrackingNo = '$trackingNo'";
+                                            $DBresultAddr = $conn->query($sqlAddr);
+
+                                            if(mysqli_query($conn, $sqlAddr)){
+                                                while($rowAddr = $DBresultAddr->fetch_assoc()){                                                    
+                                                    $address = $rowAddr["ShipmentAddress"];
+
+                                                    echo $address;
+                                                }
+                                            }else{
+                                                echo "Error when fetching data from database";
+                                            }
+                                        }else{
+                                            die("Fail to connect to database");
+                                        }
+                                    ?>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -180,15 +222,34 @@
                                         echo " on "."<b>".date('D', $day).", ".date('d', $day)." ".date('M', $day)." ".date('Y', $day)."</b>";
                                         echo " by <b>DHL</b>"
                                     ?>
-                                </td>                                    
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                     <table class="table table-danger table-hover">
                         <tbody class="text-center">
                             <tr>
-                                <th class="text-center" scope="row" colspan="1">Reference No.</th>
-                                <td scope="row" colspan="2"><?php echo $result->trackItemResponse->bd->shipmentItems[0]->shipmentID ?></td>
+                                <th class="text-center" scope="row" colspan="1">Invoice No.</th>
+                                <td scope="row" colspan="2">
+                                    <?php 
+                                        if($conn){
+                                            $sqlInvoice = "SELECT InvoiceNo FROM deliverymapping WHERE TrackingNo = '$trackingNo'";
+                                            $DBresultInvoice = $conn->query($sqlInvoice);
+
+                                            if(mysqli_query($conn, $sqlInvoice)){
+                                                while($rowInvoice = $DBresultInvoice->fetch_assoc()){                                                    
+                                                    $invoiceNo = $rowInvoice["InvoiceNo"];
+
+                                                    echo "[".$invoiceNo."] ";
+                                                }
+                                            }else{
+                                                echo "Error when fetching data from database";
+                                            }
+                                        }else{
+                                            die("Fail to connect to database");
+                                        }                                       
+                                    ?>
+                                </td>
                             </tr>     
                             <tr>
                                 <th class="text-center" scope="row" colspan="1">Tracking ID</th>
@@ -196,7 +257,26 @@
                             </tr>                            
                             <tr>
                                 <th class="text-center" scope="row" colspan="1">Shipping Address</th>
-                                <td scope="row" colspan="2"><?php echo "//Shipping address here//" ?></td>
+                                <td scope="row" colspan="2">
+                                    <?php 
+                                        if($conn){
+                                            $sqlAddr = "SELECT ShipmentAddress FROM deliverymapping WHERE TrackingNo = '$trackingNo'";
+                                            $DBresultAddr = $conn->query($sqlAddr);
+
+                                            if(mysqli_query($conn, $sqlAddr)){
+                                                while($rowAddr = $DBresultAddr->fetch_assoc()){                                                    
+                                                    $address = $rowAddr["ShipmentAddress"];
+
+                                                    echo $address;
+                                                }
+                                            }else{
+                                                echo "Error when fetching data from database";
+                                            }
+                                        }else{
+                                            die("Fail to connect to database");
+                                        }
+                                    ?>
+                                </td>
                             </tr>                       
                         </tbody>
                     </table>
