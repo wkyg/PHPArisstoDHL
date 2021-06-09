@@ -1,6 +1,7 @@
 <?php
     include "dbconn.php";
     include "DHL.php";
+    include "test.php";
     include_once "header.php";
 
     $trackingNo = $_POST["trackingNo"];
@@ -29,12 +30,19 @@
                 </div>
                 <div class="row justify-content-md-center mt-3">
                     <div class="col col-lg-6">
-                        <?php                                             
-                            getToken();                           
-                            getTracking($trackingNo, $role);
+                        <?php 
+                            TestgetToken();                                            
+                            //getToken();                           
+                            //getTracking($trackingNo, $role);
                         ?>                                                
                     </div>                    
-                </div>                
+                </div>  
+                <div class="row justify-content-md-center mt-3">
+                    <p class="fst-italic">
+                        Note: Your parcel should arrive within 3 to 7 working days.<br>
+                        (*Longer delivery times may be required for remote areas and Public Holidays)
+                    </p>                    
+                </div>              
             </div>
         </main>
         <?php

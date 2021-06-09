@@ -1,6 +1,6 @@
 <?php
-    function getToken(){   
-        $user = "MTYzNzcxMzQzOQ==";
+    function TestGetToken(){   
+        $user = "MTYzNzcxMzQzOQ=";
         $password = "MTQ4MDg3O2304211619163487";
         $returnFormat = "json";
          
@@ -25,7 +25,7 @@
     
         $result = json_decode($response);
 
-        $token = $result->accessTokenResponse->token;
+        //$token = $result->accessTokenResponse->token;
     
         curl_close($curl);   
     
@@ -36,10 +36,10 @@
             //echo $token;      
         }        
 
-        return $token;
+        //return $token;
     }  
 
-    function getTracking($trackingNo, $role){
+    function TestgetTracking($trackingNo, $role){
         //echo $passTok;
 
         //echo $sin;
@@ -79,6 +79,7 @@
 	    } else {
             //echo $result;
             //var_dump($result);
+            /*
             if($role == "stf"){?>
                 <div class="col col-lg-12">
                     <table class="table table-danger table-hover">
@@ -400,7 +401,7 @@
                         </tbody>
                     </table>
                 </div><?php
-            }
+            }*/
 	    }
     }
 ?>

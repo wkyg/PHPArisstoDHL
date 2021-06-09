@@ -29,7 +29,7 @@
                             </div>
                         </form>
                     </div>                                       
-                </div> 
+                </div>                 
                 <div class="row justify-content-md-center mt-3">
                     <p class="fs-4">Upload</p>
                 </div>  
@@ -47,7 +47,7 @@
                             </div>
                         </form>
                     </div>
-                </div>             
+                </div>                             
             </div>
         </main> 
         <?php
